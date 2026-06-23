@@ -1,7 +1,7 @@
 // ─── Config ───────────────────────────────────────────────────────────────────
 const TOTAL_QUESTIONS = 5;
-// const API_URL = `https://opentdb.com/api.php?amount=${TOTAL_QUESTIONS}&category=21&type=multiple`;
-const API_URL = `https://the-trivia-api.com/v2/questions?categories=sport_and_leisure&limit=10&tags=football`;
+const API_URL = `https://opentdb.com/api.php?amount=${TOTAL_QUESTIONS}&category=21&type=multiple`;
+// const API_URL = `https://the-trivia-api.com/v2/questions?categories=sport_and_leisure&limit=10&tags=football`;
 
 // ─── State ────────────────────────────────────────────────────────────────────
 let questions = [];
@@ -43,29 +43,29 @@ async function fetchQuestions() {
     const res = await fetch(API_URL);
     const data = await res.json();
 
-    // if (data.response_code !== 0 || !data.results.length) {
-    //   throw new Error("No questions returned");
-    // }
-
-    if (!Array.isArray(data) || !data.length) {
+    if (data.response_code !== 0 || !data.results.length) {
       throw new Error("No questions returned");
     }
 
-    // Decode HTML entities from the API
-    // questions = data.results.map(q => ({
-    //   question: decodeHTML(q.question),
-    //   correct:  decodeHTML(q.correct_answer),
-    //   answers:  shuffle([
-    //     decodeHTML(q.correct_answer),
-    //     ...q.incorrect_answers.map(decodeHTML),
-    //   ]),
-    // }));
+    // if (!Array.isArray(data) || !data.length) {
+    //   throw new Error("No questions returned");
+    // }
 
-    questions = data.map(q => ({
-      question: q.question.text,
-      correct: q.correctAnswer,
-      answers: shuffle([q.correctAnswer, ...q.incorrectAnswers]),
+    // // Decode HTML entities from the API
+    questions = data.results.map(q => ({
+      question: decodeHTML(q.question),
+      correct:  decodeHTML(q.correct_answer),
+      answers:  shuffle([
+        decodeHTML(q.correct_answer),
+        ...q.incorrect_answers.map(decodeHTML),
+      ]),
     }));
+
+    // questions = data.map(q => ({
+    //   question: q.question.text,
+    //   correct: q.correctAnswer,
+    //   answers: shuffle([q.correctAnswer, ...q.incorrectAnswers]),
+    // }));
 
     totalQEl.textContent = TOTAL_QUESTIONS;
     maxScoreEl.textContent = TOTAL_QUESTIONS;
