@@ -1,0 +1,190 @@
+:root {
+  --charcoal-blue: #264653ff;
+  --verdigris:     #2a9d8fff;
+  --tuscan-sun:    #e9c46aff;
+  --sandy-brown:   #f4a261ff;
+  --burnt-peach:   #e76f51ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--charcoal-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  font-family: sans-serif;
+}
+
+.container {
+  background-color: #fdf6e3;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(38, 70, 83, 0.5);
+}
+
+/* ── Screens ── */
+.screen {
+  display: none;
+  padding: 2rem;
+  text-align: center;
+}
+
+.screen.active {
+  display: block;
+}
+
+/* ── Start Screen ── */
+#start-screen h1 {
+  color: var(--sandy-brown);
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+}
+
+#start-screen p {
+  color: var(--charcoal-blue);
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+/* ── Quiz Screen ── */
+.quiz-header {
+  margin-bottom: 1rem;
+}
+
+#question-text {
+  color: var(--charcoal-blue);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.quiz-info {
+  display: flex;
+  justify-content: space-between;
+  color: var(--verdigris);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ── Answer Buttons ── */
+.answers-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.answer-btn {
+  background-color: #fdf6e3;
+  color: var(--charcoal-blue);
+  border: 2px solid var(--tuscan-sun);
+  border-radius: 10px;
+  padding: 1rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.answer-btn:hover {
+  background-color: rgba(233, 196, 106, 0.25);
+  border-color: var(--sandy-brown);
+}
+
+.answer-btn.correct {
+  background-color: rgba(42, 157, 143, 0.12);
+  border-color: var(--verdigris);
+  color: var(--verdigris);
+}
+
+.answer-btn.incorrect {
+  background-color: rgba(231, 111, 81, 0.12);
+  border-color: var(--burnt-peach);
+  color: var(--burnt-peach);
+}
+
+/* ── Progress Bar ── */
+.progress-bar {
+  height: 10px;
+  background-color: rgba(233, 196, 106, 0.3);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.progress {
+  height: 100%;
+  background-color: var(--verdigris);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* ── Result Screen ── */
+#result-screen h1 {
+  color: var(--sandy-brown);
+  margin-bottom: 30px;
+}
+
+.result-info {
+  background-color: var(--charcoal-blue);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.result-info p {
+  font-size: 1.2rem;
+  color: var(--tuscan-sun);
+  margin-bottom: 1rem;
+}
+
+#result-message {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--tuscan-sun);
+}
+
+/* ── Buttons ── */
+button {
+  background-color: var(--burnt-peach);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--sandy-brown);
+}
+
+/* ── Responsive ── */
+@media (max-width: 500px) {
+  .screen {
+    padding: 1rem;
+  }
+
+  #start-screen h1 {
+    font-size: 2rem;
+  }
+
+  #question-text {
+    font-size: 1.3rem;
+  }
+
+  .answer-btn {
+    padding: 12px;
+  }
+
+  button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+}
